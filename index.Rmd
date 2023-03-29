@@ -45,22 +45,11 @@ p2_scatter <- cv_states_today_scatter %>%
 p3_line <- cv_states %>%  
   filter(state == "Florida") %>% 
   plot_ly(
-    x=~date, 
+    x=~date,
+    y=~new_cases,
     mode = "lines"
   ) %>% 
-  layout(
-    title = "Florida New Cases and New Deaths",
-         hovermode = "compare"
-  ) %>%
-  add_trace(
-    y=~new_cases, 
-    name = "new cases"
-  ) %>% 
-  add_trace(
-    y=~new_deaths,
-    name= "new deaths"
-  )  
-  
+  layout(title = "Florida's Daily New Cases Trend")
 ```
 
 ## Showcasing plots {.tabset}
@@ -75,10 +64,11 @@ p1_scatter
 p2_scatter
 ```
 
-### Figure 3 
+### Figure 3
 ```{r}
-p3_line 
+p3_line
 ```
+
 
 ## Conclusion
 
