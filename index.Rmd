@@ -1,0 +1,10 @@
+---
+title: "JSC370 Final Project"
+author: "Benson Chou"
+output: 
+    html_document:
+        toc: TRUE # table of content
+        toc_float: TRUE
+---
+
+This is my JSC370 Final Project website.
