@@ -50,6 +50,21 @@ p3_line <- cv_states %>%
     mode = "lines"
   ) %>% 
   layout(title = "Florida's Daily New Cases Trend")
+
+library(tidyr)
+cv_states_mat <- cv_states %>%  
+  filter(date >= "2023-01-01") %>% 
+  select(state, date, new_cases) %>% 
+  pivot_wider(names_from = state, values_from = new_cases)
+p4_map <- cv_states_mat %>% 
+  plot_ly(
+    x = colnames(cv_states_mat), 
+    y = rownames(cv_states_mat), 
+    z = ~ as.matrix(cv_states_mat), 
+    type = "heatmap", 
+    showscale = TRUE
+  ) %>% 
+  layout(title = "Heat Map for New Cases in Each State")
 ```
 
 ## Showcasing plots {.tabset}
@@ -69,6 +84,10 @@ p2_scatter
 p3_line
 ```
 
+### Figure 4
+```{r}
+p4_map
+```
 
 ## Conclusion
 
