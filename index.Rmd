@@ -8,3 +8,77 @@ output:
 ---
 
 This is my JSC370 Final Project website.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE)
+library(dplyr)
+library(plotly)
+source("process_COVID_data.R")
+```
+
+```{r}
+p1_scatter <- cv_states_today %>% 
+  plot_ly(x = ~pop_density, y = ~deathsper100k,
+          type = 'scatter', mode = 'markers', color = ~state,
+          size = ~population, sizes = c(5, 70), marker = list(sizemode='diameter', opacity=0.5),
+          hoverinfo = 'text',
+          text = ~paste( paste(state, ":", sep=""), paste(" Cases per 100k: ", per100k, sep="") , paste(" Deaths per 100k: ",
+                        deathsper100k, sep=""), sep = "<br>")) %>%
+  layout(title = "Population-normalized COVID-19 deaths vs. population density",
+                  yaxis = list(title = "Deaths per 100k"), xaxis = list(title = "Population Density"),
+         hovermode = "compare")
+
+# filter out "District of Columbia"
+cv_states_today_scatter <- cv_states_today %>% filter(state!="District of Columbia")
+
+p2_scatter <- cv_states_today_scatter %>% 
+  plot_ly(x = ~pop_density, y = ~deathsper100k,
+          type = 'scatter', mode = 'markers', color = ~state,
+          size = ~population, sizes = c(5, 70), marker = list(sizemode='diameter', opacity=0.5),
+          hoverinfo = 'text',
+          text = ~paste( paste(state, ":", sep=""), paste(" Cases per 100k: ", per100k, sep="") , paste(" Deaths per 100k: ",
+                        deathsper100k, sep=""), sep = "<br>")) %>%
+  layout(title = "Population-normalized COVID-19 deaths vs. population density",
+                  yaxis = list(title = "Deaths per 100k"), xaxis = list(title = "Population Density"),
+         hovermode = "compare")
+
+p3_line <- cv_states %>%  
+  filter(state == "Florida") %>% 
+  plot_ly(
+    x=~date, 
+    mode = "lines"
+  ) %>% 
+  layout(
+    title = "Florida New Cases and New Deaths",
+         hovermode = "compare"
+  ) %>%
+  add_trace(
+    y=~new_cases, 
+    name = "new cases"
+  ) %>% 
+  add_trace(
+    y=~new_deaths,
+    name= "new deaths"
+  )  
+  
+```
+
+## Showcasing plots {.tabset}
+
+### Figure 1
+```{r}
+p1_scatter
+```
+
+### Figure 2
+```{r}
+p2_scatter
+```
+
+### Figure 3 
+```{r}
+p3_line 
+```
+
+## Conclusion
+
