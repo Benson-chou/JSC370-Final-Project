@@ -13,81 +13,68 @@ This is my JSC370 Final Project website.
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE)
 library(dplyr)
 library(plotly)
-source("process_COVID_data.R")
+library(tidyr)
 ```
 
 ```{r}
-p1_scatter <- cv_states_today %>% 
-  plot_ly(x = ~pop_density, y = ~deathsper100k,
-          type = 'scatter', mode = 'markers', color = ~state,
-          size = ~population, sizes = c(5, 70), marker = list(sizemode='diameter', opacity=0.5),
-          hoverinfo = 'text',
-          text = ~paste( paste(state, ":", sep=""), paste(" Cases per 100k: ", per100k, sep="") , paste(" Deaths per 100k: ",
-                        deathsper100k, sep=""), sep = "<br>")) %>%
-  layout(title = "Population-normalized COVID-19 deaths vs. population density",
-                  yaxis = list(title = "Deaths per 100k"), xaxis = list(title = "Population Density"),
-         hovermode = "compare")
-
-# filter out "District of Columbia"
-cv_states_today_scatter <- cv_states_today %>% filter(state!="District of Columbia")
-
-p2_scatter <- cv_states_today_scatter %>% 
-  plot_ly(x = ~pop_density, y = ~deathsper100k,
-          type = 'scatter', mode = 'markers', color = ~state,
-          size = ~population, sizes = c(5, 70), marker = list(sizemode='diameter', opacity=0.5),
-          hoverinfo = 'text',
-          text = ~paste( paste(state, ":", sep=""), paste(" Cases per 100k: ", per100k, sep="") , paste(" Deaths per 100k: ",
-                        deathsper100k, sep=""), sep = "<br>")) %>%
-  layout(title = "Population-normalized COVID-19 deaths vs. population density",
-                  yaxis = list(title = "Deaths per 100k"), xaxis = list(title = "Population Density"),
-         hovermode = "compare")
-
-p3_line <- cv_states %>%  
-  filter(state == "Florida") %>% 
-  plot_ly(
-    x=~date,
-    y=~new_cases,
-    mode = "lines"
-  ) %>% 
-  layout(title = "Florida's Daily New Cases Trend")
-
-library(tidyr)
-cv_states_mat <- cv_states %>%  
-  filter(date >= "2023-01-01") %>% 
-  select(state, date, new_cases) %>% 
-  pivot_wider(names_from = state, values_from = new_cases)
-p4_map <- cv_states_mat %>% 
-  plot_ly(
-    x = colnames(cv_states_mat), 
-    y = rownames(cv_states_mat), 
-    z = ~ as.matrix(cv_states_mat), 
-    type = "heatmap", 
-    showscale = TRUE
-  ) %>% 
-  layout(title = "Heat Map for New Cases in Each State")
+brilliant <- read.csv("data/brilliant.csv", header=TRUE)
+brilliant <- brilliant %>% distinct()
+# For consistency, I will convert "Super Ideal" into "Premium"
+brilliant$cut[brilliant$cut == 'Super Ideal'] <- 'Premium'
+brilliant$cut <- factor(brilliant$cut, levels=c("Fair", "Good", "Very Good", "Ideal", "Premium"))
+brilliant$shape <- as.factor(brilliant$shape)
+brilliant$color <- as.factor(brilliant$color)
+brilliant$clarity <- factor(brilliant$clarity, levels=c("SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF", "FL"))
 ```
+
+```{r}
+new_brilliant <- brilliant[brilliant$price < 1343, ]
+```
+
+There are a lot of diamonds with prices that are considered as outliers (1.5IQR + Q3). Thus, I will remove them first and proceed with the filtered data. 
 
 ## Showcasing plots {.tabset}
 
 ### Figure 1
-```{r}
-p1_scatter
+```{r fig.height=8, fig.width=10}
+fig1 <- new_brilliant %>% 
+  ggplot(aes(x=carat, y=price, color=cut, 
+             text = paste(
+               "  Clarity: ", clarity, "\n"
+               ))) + 
+  geom_point() + facet_wrap(vars(shape)) + 
+  labs(title = "Carat vs Price for Each Cut Quality for Each Shape")
+ggplotly(fig1)
 ```
 
+We can see that as carat increases, the price also increases for each cut quality and in each shape group. 
+
+
 ### Figure 2
-```{r}
-p2_scatter
+```{r fig.height=10, fig.width=12}
+lm_d = lm(price~depth, new_brilliant)
+lm_t = lm(price~table, new_brilliant)
+p2 <- plot_ly(new_brilliant, y = ~price) %>% 
+  add_trace(x = ~depth, name = "depth", mode = "markers", trendline = "ols") %>%
+  add_trace(x = ~table, name = "table", mode = "markers") %>% 
+  layout(xaxis = list(title = "Percentage"), title = list(title = "Depth and Table vs Price"), yaxis = list(title = "Price")) %>% 
+  add_lines(x = ~depth, y = fitted(lm_d), name="Depth Trend") %>% 
+  add_lines(x = ~table, y = fitted(lm_t), name="Table Trend")
+p2
 ```
+
+We can see that there are all different prices for each Table and Depth size. However, we do see an increasing trend from both table and depth with price. 
 
 ### Figure 3
 ```{r}
-p3_line
+p3 <- new_brilliant %>% 
+  ggplot(aes(x=cut, 
+             fill=color)) +
+  geom_bar() + 
+  labs(title="Clarity Level for Each Color")
+ggplotly(p3) %>% 
+  layout(xaxis =list(title = "Cut"), yaxis = list(title = "Count"))
 ```
 
-### Figure 4
-```{r}
-p4_map
-```
-
-## Conclusion
+As the quality of the cut increases, the count in each color group increases. However, we do see that the most popular options are above very good cuts with a decent color (E, F). 
 

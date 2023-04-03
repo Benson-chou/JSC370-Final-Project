@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Methods_and_Results.knit</title>
+
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">JSC370 Final Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Methods_and_results.html">Methods and Results</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Benson-chou/JSC370-Final-Project">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/chiayouchou/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="examining-the-relationship-between-characteristics-of-a-diamond-and-its-price" class="section level2">
+<h2>Examining the relationship between characteristics of a diamond and its price</h2>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Growing up, it is common to hear my parent’s talking about how much carat a diamond is and then proceeding to say it must be really expensive if they hear a high number. However, there are many more characteristics, such as the quality of the cut, color, clarity, table, and depth that can be taken account into when evaluating a diamond’s value.</p>
+<p>For this report, I will be using data scraped from Brilliant Earth. <a href="https://www.brilliantearth.com/">Brilliant Earth</a> is a well-known jewelry company that focuses on ethically sourced and sustainable diamonds, gemstones, and metals. They offer a wide range of engagement rings, wedding bands, and other jewelry that are not only stunning but also socially conscious. On their website, they display a table of available diamonds and their characteristics such as price, shape, carat, quality of the cut, color, clarity, depth, and table. (More details of variables will be discussed in next section)</p>
+<p>In this report, I would like to investigate what other qualities, besides from carat, influences a diamond’s value.</p>
+</div>
+<div id="methods" class="section level2">
+<h2>Methods</h2>
+<div id="data-collection" class="section level3">
+<h3>Data Collection</h3>
+<p>As there are no API or directly downloadable data from Brilliant Earth, I scraped the data in Python, using Python’s <code>Selenium Webdriver</code> to get the dynamic table’s Json object, and using the <code>Json</code> and <code>pandas</code> packages to coerce this data into a data frame.</p>
+<p>The table shown below is an example of how the dataset looks like.</p>
+<ol style="list-style-type: decimal">
+<li>price: price in CAD</li>
+<li>shape: shape of the diamond</li>
+<li>carat: weight of the diamond</li>
+<li>cut: quality of the cut</li>
+<li>color: diamond colour, from J (worst) to D (best)</li>
+<li>clarity: a measurement of how clear the diamond is (SI2(worst), SI1, VS2, VS1, VVS2, VVS1, IF, FL(best))</li>
+<li>table: width of top of diamond relative to widest point</li>
+<li>depth: total depth percentage</li>
+</ol>
+</div>
+<div id="data-cleaning" class="section level3">
+<h3>Data Cleaning</h3>
+<p>The data collected seems to be well-formatted and the columns are already selected to be variables of interest during the web scraping process. However, we still need to clean the data for: missing data, duplicates, factorization, and unit. With the is.na() function, we see that there are no missing data. I removed the duplicate observations ith the distinct() function. I replaced cut values ‘Super Ideal’ into ‘Premium’ for simplicity and avoid confusion. Lastly, I used as.factor() to factorize the character variables.</p>
+We can see that there are potential outliers from price, carat, table, and depth. Let’s check if these observations were a mistake or not.
+<p>We can see that even though these observations include values that deviate from the rest by a significant amount, they do not seem to be recorded as a mistake or placeholder for <code>NA</code> values. These outliers may also further help us explain whether or not each separate variable fully contribute to the value of a diamond, which at this stage, does not seem like one variable has a strong correlation with the price alone.</p>
+</div>
+</div>
+<div id="data-exploration" class="section level2">
+<h2>Data Exploration</h2>
+<p>First, I will create histograms over the continuous variables (price, carat, table, and depth) <img src="Methods_and_Results_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We can see that the majority of the diamonds have similar price around 1000 CAD with some pricier diamonds scattered on the right. This may be due to cheaper diamonds being more accessible to both the vendor and customers. However, this is a limitation of our data, which I will discuss more in the limitations section.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>The distribution of the carat also appears to be skewed to the right, with a mean of around 0.3. This is also normal as it is more common to see smaller diamonds as it is a rare resource.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>The table percentage of the diamond appears to be skewed to the right. I would consider this as normal due to how the diamonds are usually cut to look appealing. The potential outliers of the table could be caused by diamonds having different shapes.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>The depth percentage of the diamond appears to be roughly Normal. I would consider this as normal due to how the diamonds are usually cut to look appealing. The potential outliers of the depth could also be caused by diamonds having different shapes.</p>
+<p>Next, I will look into how the prices differ based on each group of our factors (Shape, cut, color, and clarity) <img src="Methods_and_Results_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We can see that for different shapes, the median price is around the same. The greater price range for round shaped diamond compared to other shapes may be due its high popularity as shown in Table 2.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We can see that even though the different cuts’ median prices are similar, the price range for a premium cut diamond is greater compared to other cuts. This means that there are more variety in terms of price when it comes to having an above very good cut.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We can see that for different color, the median price is around the same. The greater price range for D colored diamond compared to other shapes may be due it being the best possible color, thus having more variability.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We can see that for different clarity, the median price is around the same. We also see that in all clarity levels, there are upper outliers. This means that despite having different clarity levels, there are still a variety of diamonds that are expensive.</p>
+<p>Next, I will look into how the prices differ based on continuous variables (table and depth): <img src="Methods_and_Results_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We see that in general, there is a cheap option for all different depths. However, around the mean depth (63%), we see a more more expensive diamond options</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We see a pretty similar result as the depth vs price table, where all tables have a cheap option and have a more expensive options around the mean table (59%).</p>
+<p>Based on the box plot and scatter plots, we see that there are a variety of diamond prices for each category levels.</p>
+</div>
+<div id="preliminary-results" class="section level2">
+<h2>Preliminary Results</h2>
+<p>To be able to find out what other variables influence the value of a diamond, I will create scatter plots of carat and price grouped by each categorical variables (cut, color, clarity, and shape) <img src="Methods_and_Results_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Besides the bottom left corner, we see that there are more Ideal and especially Premium cut diamonds having higher price as carat increases. The Ideal cut diamonds seem to have a linear relationship between carat and price while the premium cut diamonds seem to have an rough exponential relationship between carat and price.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>For each clarity level, we see that there is a rough exponential relationship between carat and price.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We see a rough exponential relationship between carat and price for each diamond shape.</p>
+<p>Now, we want to check the frequencies between two categorical variables: <img src="Methods_and_Results_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We see that a combination of decent to average color (E, F) with below average clarity (SI2, SI1) are preferred more compare to other groups.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We see that above very good cut with below average clarity are preferred more. As the quality of cut increases, there are also more options across all clarity level.</p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Similar to the last graph, as the quality of the cut increases, the count in each color group increases. However, we do see that the most popular options are above very good cuts with a decent color (E, F).</p>
+</div>
+<div id="conclusions" class="section level2">
+<h2>Conclusions</h2>
+<p>In this report, my primary guiding question was to investigate what other qualities, besides from carat, of a diamond influences its value.</p>
+<p>Based on the scatter plots, we can say that there seems to exist linear or exponential relationships for the categorical variables and price, while more detailed investigation may be needed for continuous variables such as table and depth.</p>
+<p>Based on the stacked bar plots, we can see what pair of categories are more popular and which category do people care more about (which seems to be cut, color, and then clarity).</p>
+</div>
+<div id="limitations" class="section level2">
+<h2>Limitations</h2>
+<p>Overall, the most noticeable limitation of this project is that the diamond prices are not normally distributed. This data majorily consists of cheaper diamonds within a similar range. This may cause some variables being underrepresented when they actually influence the value of a diamond more. This limitation may be caused by how the data was obtained. As the table was a dynamic table, the parsing process was made more difficult as it required more manual work in changing the path to request the data. This may caused us to miss some data that could be crucial to this project.</p>
+</div>
+<div id="future-steps" class="section level2">
+<h2>Future Steps</h2>
+<p>Although the data we collected from Brilliant Earth did not fully clear up our question of which factors influence the value of a diamond, it still provided interesting and elementary insights.</p>
+<p>As aforementioned, the skewness of the price may be a huge problem as I progress through this project. A possible way to solve this issue is by introducing different sources, simulating data, or using bootstrapping methods.</p>
+<p>Another area I want to look into is whether popular combinations of diamond characteristics increase its value. As shown in the bar plots of the preliminary results, we see that Premium Cut with SI1 clarity seems to be more popular. Thus, I would want to look into whether a Premium Cut with SI1 clarity has a higher value compared to a less popular combination, ex: Very Good cut with SI1 clarity.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
