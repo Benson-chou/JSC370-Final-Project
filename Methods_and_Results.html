@@ -11,7 +11,7 @@
 
 
 
-<title>Methods_and_results.knit</title>
+<title>Methods_and_Results.knit</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -324,7 +324,7 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="Methods_and_results.html">Methods and Results</a>
+  <a href="Methods_and_Results.html">Methods and Results</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -388,41 +388,41 @@ We can see that there are potential outliers from price, carat, table, and depth
 </div>
 <div id="data-exploration" class="section level2">
 <h2>Data Exploration</h2>
-<p>First, I will create histograms over the continuous variables (price, carat, table, and depth) <img src="Methods_and_Results_files/figure-html/unnamed-chunk-4-1.png" width="80%" /></p>
+<p>First, I will create histograms over the continuous variables (price, carat, table, and depth) <img src="Methods_and_Results_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We can see that the majority of the diamonds have similar price around 1000 CAD with some pricier diamonds scattered on the right. This may be due to cheaper diamonds being more accessible to both the vendor and customers. However, this is a limitation of our data, which I will discuss more in the limitations section.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-5-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>The distribution of the carat also appears to be skewed to the right, with a mean of around 0.3. This is also normal as it is more common to see smaller diamonds as it is a rare resource.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-6-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>The table percentage of the diamond appears to be skewed to the right. I would consider this as normal due to how the diamonds are usually cut to look appealing. The potential outliers of the table could be caused by diamonds having different shapes.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-7-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>The depth percentage of the diamond appears to be roughly Normal. I would consider this as normal due to how the diamonds are usually cut to look appealing. The potential outliers of the depth could also be caused by diamonds having different shapes.</p>
-<p>Next, I will look into how the prices differ based on each group of our factors (Shape, cut, color, and clarity) <img src="Methods_and_Results_files/figure-html/unnamed-chunk-8-1.png" width="80%" /></p>
+<p>Next, I will look into how the prices differ based on each group of our factors (Shape, cut, color, and clarity) <img src="Methods_and_Results_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We can see that for different shapes, the median price is around the same. The greater price range for round shaped diamond compared to other shapes may be due its high popularity as shown in Table 2.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-9-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We can see that even though the different cuts’ median prices are similar, the price range for a premium cut diamond is greater compared to other cuts. This means that there are more variety in terms of price when it comes to having an above very good cut.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-10-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We can see that for different color, the median price is around the same. The greater price range for D colored diamond compared to other shapes may be due it being the best possible color, thus having more variability.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-11-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We can see that for different clarity, the median price is around the same. We also see that in all clarity levels, there are upper outliers. This means that despite having different clarity levels, there are still a variety of diamonds that are expensive.</p>
-<p>Next, I will look into how the prices differ based on continuous variables (table and depth): <img src="Methods_and_Results_files/figure-html/unnamed-chunk-12-1.png" width="80%" /></p>
+<p>Next, I will look into how the prices differ based on continuous variables (table and depth): <img src="Methods_and_Results_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We see that in general, there is a cheap option for all different depths. However, around the mean depth (63%), we see a more more expensive diamond options</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-13-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We see a pretty similar result as the depth vs price table, where all tables have a cheap option and have a more expensive options around the mean table (59%).</p>
 <p>Based on the box plot and scatter plots, we see that there are a variety of diamond prices for each category levels.</p>
 </div>
 <div id="preliminary-results" class="section level2">
 <h2>Preliminary Results</h2>
-<p>To be able to find out what other variables influence the value of a diamond, I will create scatter plots of carat and price grouped by each categorical variables (cut, color, clarity, and shape) <img src="Methods_and_Results_files/figure-html/unnamed-chunk-14-1.png" width="80%" /></p>
+<p>To be able to find out what other variables influence the value of a diamond, I will create scatter plots of carat and price grouped by each categorical variables (cut, color, clarity, and shape) <img src="Methods_and_Results_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Besides the bottom left corner, we see that there are more Ideal and especially Premium cut diamonds having higher price as carat increases. The Ideal cut diamonds seem to have a linear relationship between carat and price while the premium cut diamonds seem to have an rough exponential relationship between carat and price.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-15-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>For each clarity level, we see that there is a rough exponential relationship between carat and price.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-16-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We see a rough exponential relationship between carat and price for each diamond shape.</p>
-<p>Now, we want to check the frequencies between two categorical variables: <img src="Methods_and_Results_files/figure-html/unnamed-chunk-17-1.png" width="80%" /></p>
+<p>Now, we want to check the frequencies between two categorical variables: <img src="Methods_and_Results_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We see that a combination of decent to average color (E, F) with below average clarity (SI2, SI1) are preferred more compare to other groups.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-18-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We see that above very good cut with below average clarity are preferred more. As the quality of cut increases, there are also more options across all clarity level.</p>
-<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-19-1.png" width="80%" /></p>
+<p><img src="Methods_and_Results_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Similar to the last graph, as the quality of the cut increases, the count in each color group increases. However, we do see that the most popular options are above very good cuts with a decent color (E, F).</p>
 </div>
 <div id="conclusions" class="section level2">
