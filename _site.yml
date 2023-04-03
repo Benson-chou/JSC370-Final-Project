@@ -6,7 +6,7 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Methods and Results"
-      href: Methods_and_results.html
+      href: Methods_and_Results.html
   right:
     - icon: fa-github fa-lg
       href: https://github.com/Benson-chou/JSC370-Final-Project
