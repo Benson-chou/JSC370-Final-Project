@@ -23,6 +23,7 @@ library(rpart)
 library(randomForest)
 library(caret)
 library(rpart.plot)
+library(plotly)
 ```
 
 # Methods
@@ -118,14 +119,15 @@ We can see that for cut and clarity, while the price range for each level are ab
 
 Next, I will create a general graph to show the relationship between carat and price for each cut and shape. 
 ```{r fig.height=8, fig.width=10}
-fig1 <- new_brilliant %>% 
-  ggplot(aes(x=carat, y=price, color=cut, 
-             text = paste(
-               "  Clarity: ", clarity, "\n"
-               ))) + 
-  geom_point() + facet_wrap(vars(shape)) + 
-  labs(title = "Carat vs Price for Each Cut Quality for Each Shape") + geom_smooth(method=lm, se=FALSE)
-ggplotly(fig1)
+cbp1 <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
+          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+fig <- new_brilliant %>% 
+  ggplot(aes(jitter(carat), y=jitter(price), color = cut)) + 
+  geom_point(alpha = 0.4, shape=21) + 
+  geom_smooth(method = 'lm', se=FALSE, size = 0.8, color = "red") + 
+  facet_wrap(vars(shape)) + 
+  labs(title = "Carat vs Price for Each Cut Quality for Each Shape", x="Carat", y="Price") + scale_colour_manual(values=cbp1)
+ggplotly(fig)
 ```
 
 We also see a similar trend among different groups, which is as carat increases, the expected diamond price also increases. 
@@ -134,12 +136,13 @@ Next, I will create scatterplot over price vs table and depth.
 ```{r fig.height=10, fig.width=12}
 lm_d = lm(price~depth, new_brilliant)
 lm_t = lm(price~table, new_brilliant)
-p2 <- plot_ly(new_brilliant, y = ~price) %>% 
-  add_trace(x = ~depth, name = "depth", mode = "markers", trendline = "ols") %>%
-  add_trace(x = ~table, name = "table", mode = "markers") %>% 
+
+p2 <- plot_ly(new_brilliant, y = ~jitter(price)) %>% 
+  add_trace(x = ~depth, name = "depth", mode = "markers", opacity=0.5) %>%
+  add_trace(x = ~table, name = "table", mode = "markers", opacity=0.5) %>% 
   layout(xaxis = list(title = "Percentage"), title = list(title = "Depth and Table vs Price"), yaxis = list(title = "Price")) %>% 
-  add_lines(x = ~depth, y = fitted(lm_d), name="Depth Trend") %>% 
-  add_lines(x = ~table, y = fitted(lm_t), name="Table Trend") 
+  add_lines(x = ~depth, y = fitted(lm_d), name="Depth Trend", line = list(color="blue")) %>% 
+  add_lines(x = ~table, y = fitted(lm_t), name="Table Trend", line = list(color="orange"))
 p2
 ```
 
