@@ -255,7 +255,11 @@ bril_xgb <- caret::train(
 )
 xgb_imp <- varImp(bril_xgb, scale = FALSE)
 xgb_imp <- as.data.frame(xgb_imp$importance)
-xgb_imp %>% kable("html", caption="XGBoost Variable Importance", booktabs = TRUE) %>% kable_styling(latex_options = c("HOLD_position"))
+colnames(xgb_imp)[1] <- "Variable Importance"
+vars <- xgb_imp[1:10,c(0)]
+vals <- xgb_imp[1:10, 1]
+xgb_impo <- data.frame(Variables = vars, Variable_Importance = vals)
+xgb_impo %>% kable("html", caption="XGBoost Variable Importance", booktabs = TRUE) %>% kable_styling(latex_options = c("HOLD_position"))
 ```
 
 
