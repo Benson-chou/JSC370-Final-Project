@@ -157,7 +157,7 @@ model1 <- lm(price~., data=new_brilliant)
 lm_sum <- summary(model1)
 ```
 
-This model has an `r lm_sum$adj.r.squared * 100`% which means that only about `r lm_sum$adj.r.squared * 100`% of the variance of our predictors is explained by the variance of price. Notice that the insignificant variables are: `shapeCushion`, `shapeEmerald`, `shapePrincess`, `shapeRadiant`, `cutGood`, `cutVery Good` based on their p-values from Wald Z-test:
+This model has an $R^2$ of `r lm_sum$adj.r.squared * 100`% which means that only about `r lm_sum$adj.r.squared * 100`% of the variance of our predictors is explained by the variance of price. Notice that the insignificant variables are: `shapeCushion`, `shapeEmerald`, `shapePrincess`, `shapeRadiant`, `cutGood`, `cutVery Good` based on their p-values from Wald Z-test:
 ```{r}
 sum_tab <- as.data.frame(lm_sum$coefficients[, c(1, 4)])
 colnames(sum_tab)[1] <- "Estimate"
