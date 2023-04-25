@@ -1,13 +1,12 @@
 ---
-title: "JSC370 Final Project"
-author: "Benson Chou"
+title: "About the Project"
+author: "Chia You (Benson) Chou"
 output: 
     html_document:
         toc: TRUE # table of content
         toc_float: TRUE
+urlcolor: blue
 ---
-
-This is my JSC370 Final Project website.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE)
@@ -16,65 +15,15 @@ library(plotly)
 library(tidyr)
 ```
 
-```{r}
-brilliant <- read.csv("data/brilliant.csv", header=TRUE)
-brilliant <- brilliant %>% distinct()
-# For consistency, I will convert "Super Ideal" into "Premium"
-brilliant$cut[brilliant$cut == 'Super Ideal'] <- 'Premium'
-brilliant$cut <- factor(brilliant$cut, levels=c("Fair", "Good", "Very Good", "Ideal", "Premium"))
-brilliant$shape <- as.factor(brilliant$shape)
-brilliant$color <- as.factor(brilliant$color)
-brilliant$clarity <- factor(brilliant$clarity, levels=c("SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF", "FL"))
-```
+# Introduction
+Growing up, it is common to hear my parent's talking about how much carat a diamond is and then proceeding to say it must be really expensive if they hear a high number. However, there are many more characteristics, such as the quality of the cut, color, clarity, table, and depth that can be taken account into when evaluating a diamond's value. 
 
-```{r}
-new_brilliant <- brilliant[brilliant$price < 1343, ]
-```
+For this report, I will be using data scraped from Brilliant Earth. 
+[Brilliant Earth](https://www.brilliantearth.com/) is a well-known jewelry company that focuses on ethically sourced and sustainable diamonds, gemstones, and metals. They offer a wide range of engagement rings, wedding bands, and other jewelry that are not only stunning but also socially conscious. On their website, they display a table of available diamonds and their characteristics such as price, shape, carat, quality of the cut, color, clarity, depth, and table. (More details of variables will be discussed in next section)
 
-There are a lot of diamonds with prices that are considered as outliers (1.5IQR + Q3). Thus, I will remove them first and proceed with the filtered data. 
+# Research Question
+In this report, I would like to investiage this question: What other qualities, besides from carat, influences a diamond's value the most? Do they have a positive or negative influence on a diamond's value?
 
-## Showcasing plots {.tabset}
-
-### Figure 1
-```{r fig.height=8, fig.width=10}
-fig1 <- new_brilliant %>% 
-  ggplot(aes(x=carat, y=price, color=cut, 
-             text = paste(
-               "  Clarity: ", clarity, "\n"
-               ))) + 
-  geom_point() + facet_wrap(vars(shape)) + 
-  labs(title = "Carat vs Price for Each Cut Quality for Each Shape")
-ggplotly(fig1)
-```
-
-We can see that as carat increases, the price also increases for each cut quality and in each shape group. 
-
-
-### Figure 2
-```{r fig.height=10, fig.width=12}
-lm_d = lm(price~depth, new_brilliant)
-lm_t = lm(price~table, new_brilliant)
-p2 <- plot_ly(new_brilliant, y = ~price) %>% 
-  add_trace(x = ~depth, name = "depth", mode = "markers", trendline = "ols") %>%
-  add_trace(x = ~table, name = "table", mode = "markers") %>% 
-  layout(xaxis = list(title = "Percentage"), title = list(title = "Depth and Table vs Price"), yaxis = list(title = "Price")) %>% 
-  add_lines(x = ~depth, y = fitted(lm_d), name="Depth Trend") %>% 
-  add_lines(x = ~table, y = fitted(lm_t), name="Table Trend")
-p2
-```
-
-We can see that there are all different prices for each Table and Depth size. However, we do see an increasing trend from both table and depth with price. 
-
-### Figure 3
-```{r}
-p3 <- new_brilliant %>% 
-  ggplot(aes(x=cut, 
-             fill=color)) +
-  geom_bar() + 
-  labs(title="Clarity Level for Each Color")
-ggplotly(p3) %>% 
-  layout(xaxis =list(title = "Cut"), yaxis = list(title = "Count"))
-```
-
-As the quality of the cut increases, the count in each color group increases. However, we do see that the most popular options are above very good cuts with a decent color (E, F). 
+# Access the Project
+View the [complete pdf report](https://github.com/Benson-chou/JSC370-Final-Project/blob/main/JSC370-Final-Project-Report.pdf)
 

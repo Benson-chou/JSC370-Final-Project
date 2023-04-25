@@ -1,0 +1,14 @@
+---
+output: 
+    html_document:
+        toc: TRUE # table of content
+        toc_float: TRUE
+---
+
+# Conclusion
+From our initial multi-variable relationship visuals, attributes such as cut, color, shape, clarity, carat, and depth correlate with the pricing of the diamond. In the linear model, we see that in addition to carat, attributes like: color, clarity, shape, cut, table, and depth all have factor levels that are significant. We weren't able to remove the insignificant factor levels as it decreases our $R^2$. Despite these insignificant varaibles and factors, things matched our expectations as carat positively influences the price the most while the other attributes, except color, also increases the price. This can be further supported by the output from our machine learning models. We noticed that carat, color, and clarity played a big role in predicting a diamond price as it appeared in the top 3 of all 3 models. In conclusion, we found that asides from carat, the next positively influential quality is clarity. And not surprisingly, the value of a diamond increases as its qualities get better.
+
+## Limitations & Future Directions 
+There are several limitations of this study. One would be how the data was obtained. As the table on the website was a dynamic table, the parsing process was made more difficult as it required to loop through different paths to request the data. This may caused us to miss some data that could be crucial to this project. Next, Brilliant Earth may not represent the whole diamond selling industry. Thus, there may be ways they set prices for their diamonds that are different to other vendors. 
+
+One thing that I want to further investigate that was not available was introducing the time when the prices are decided. I believe that time may also play a role when deciding the diamond prices (especially when there are high or low demands). 

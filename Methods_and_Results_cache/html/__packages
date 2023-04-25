@@ -11,3 +11,13 @@ stringr
 forcats
 lubridate
 jsonlite
+gridExtra
+rpart
+rpart.plot
+randomForest
+gbm
+xgboost
+lattice
+caret
+finalfit
+xtable
