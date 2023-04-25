@@ -8,6 +8,6 @@ For this report, I will be using data scraped from Brilliant Earth.
 
 ## Website
 The website is online at:
-https://benson-chou.github.io/JSC370-Final-Project/
+https://benson-chou.github.io/JSC370-Final-Project/index.html
 
 
